@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#173b31" />
+  <meta name="description" content="Acompañamiento nutricional personalizado, sin dietas extremas. Agenda una consulta online o presencial." />
+  <title>Nutrición Consciente | Conoce nuestra atención</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --forest:#173b31; --deep:#102f27; --sage:#dce9d7; --lime:#dae7a9; --cream:#faf8f2; --white:#fff; --ink:#253b33; --muted:#64756e; --border:#e0e8df; --coral:#df977b; --shadow:0 24px 64px rgba(24,59,49,.09); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:98px; }
+    body { margin:0; font-family:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif; color:var(--ink); background:var(--cream); }
+    button, input, select { font:inherit; }
+    button { cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
+    :focus-visible { outline:3px solid #c47559; outline-offset:3px; }
+    .container { width:min(1180px,calc(100% - 48px)); margin:auto; }
+    .eyebrow { color:#637961; font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .eyebrow-light { color:#bdddac; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; gap:12px; padding:16px 24px; border:1px solid transparent; border-radius:12px; font-weight:800; line-height:1.15; transition:transform .18s,background .18s,box-shadow .18s; white-space:nowrap; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:white; background:var(--forest); box-shadow:0 8px 20px rgba(23,59,49,.15); }
+    .btn-primary:hover { background:#275346; }
+    .btn-light { color:var(--deep); background:var(--lime); }
+    .btn-light:hover { background:#e7f0be; }
+    .btn-outline { color:var(--forest); background:transparent; border-color:#c7d4c9; }
+    .btn-outline:hover { background:#edf3e9; }
+    .btn svg { width:18px; height:18px; flex:none; }
+    .topnote { background:var(--deep); color:#e3efe4; text-align:center; padding:9px 16px; font-size:12px; font-weight:600; letter-spacing:.025em; }
+    .topnote span { color:#d9eba6; }
+    header { position:sticky; top:0; z-index:50; background:rgba(250,248,242,.94); border-bottom:1px solid rgba(221,229,220,.85); backdrop-filter:blur(18px); }
+    .nav { display:flex; justify-content:space-between; align-items:center; min-height:76px; gap:25px; }
+    .brand { display:flex; align-items:center; gap:11px; font-family:'Manrope',sans-serif; font-size:19px; line-height:1.1; font-weight:800; letter-spacing:-.055em; color:var(--deep); }
+    .brand small { display:block; color:#788e7f; font-size:10px; font-weight:700; letter-spacing:.14em; margin-top:5px; }
+    .brandmark { display:grid; place-items:center; color:#f5f8ef; background:var(--forest); width:42px; height:42px; border-radius:12px 12px 12px 3px; }
+    .brandmark svg { width:27px; height:27px; }
+    .navlinks { display:flex; gap:29px; align-items:center; }
+    .navlinks a { font-size:13px; font-weight:700; color:#546a5e; }
+    .navlinks a:hover { color:var(--forest); }
+    .nav .btn { font-size:13px; padding:13px 17px; }
+    .mobile-toggle { display:none; background:none; border:0; color:var(--forest); }
+    .hero { position:relative; padding:65px 0 85px; overflow:hidden; }
+    .hero:before { content:''; position:absolute; width:490px; height:490px; border:1px solid #e5ebdb; border-radius:50%; left:-330px; top:70px; pointer-events:none; }
+    .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:52px; }
+    .hero-copy { padding:24px 0; position:relative; z-index:1; }
+    .tag { display:inline-flex; align-items:center; gap:8px; border:1px solid #d7e3cc; background:#f0f4e8; padding:9px 13px; border-radius:30px; font-size:11px; font-weight:800; color:#52705a; letter-spacing:.04em; }
+    .tag .dot { width:7px; height:7px; background:#6e9a60; border-radius:50%; }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2,h3 { font-family:'Manrope',sans-serif; }
+    h1 { margin:23px 0 22px; font-size:clamp(45px,5vw,75px); letter-spacing:-.065em; line-height:1.095; font-weight:800; color:var(--deep); }
+    h1 em { color:#87a66e; font-style:normal; }
+    .hero-lede { font-size:17px; line-height:1.85; color:#65786c; max-width:520px; }
+    .hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .trust { display:flex; gap:22px; flex-wrap:wrap; margin-top:43px; }
+    .trust-item { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:700; color:#5c7364; }
+    .trust-item svg { width:19px; height:19px; color:#7d9c70; }
+    .hero-art { height:550px; position:relative; display:flex; align-items:center; justify-content:center; }
+    .blob { position:absolute; inset:19px 5px 22px 36px; border-radius:46% 48% 44% 42% / 38% 49% 51% 47%; background:#e5edda; transform:rotate(-13deg); }
+    .blob:before { content:''; position:absolute; inset:26px; border:1px solid #cbdcc3; border-radius:inherit; }
+    .dish-shadow { position:absolute; width:390px; height:390px; background:#5c806b; opacity:.18; border-radius:50%; filter:blur(32px); transform:translate(7px,28px); }
+    .plate { position:relative; width:395px; height:395px; border-radius:50%; background:radial-gradient(circle at 34% 28%,#fff 20%,#e7ede4 65%,#bccdbd 96%); box-shadow:14px 25px 55px rgba(30,67,43,.17),inset -10px -10px 19px #e3e8de,inset 8px 10px 22px #fff; border:10px solid #f6f7f2; display:grid; place-items:center; }
+    .plate-inner { width:320px; height:320px; border:2px solid #f0f3e9; border-radius:50%; overflow:hidden; display:grid; place-items:center; background:#f2f0e5; box-shadow:inset 0 3px 19px rgba(36,60,38,.1); }
+    .plate svg { width:105%; height:105%; }
+    .floating { position:absolute; display:flex; align-items:center; gap:10px; z-index:3; background:rgba(255,255,255,.95); border:1px solid #f0f1e9; border-radius:15px; padding:14px 16px; box-shadow:0 14px 38px rgba(35,64,46,.13); }
+    .floating strong { display:block; font-size:12px; color:#244c38; }
+    .floating small { display:block; margin-top:4px; font-size:11px; color:#809184; }
+    .float-icon { display:grid; place-items:center; width:35px; height:35px; border-radius:12px; background:#eef2d8; color:#698b53; font-size:17px; }
+    .float-top { right:-11px; top:74px; transform:rotate(3deg); }
+    .float-bottom { left:-26px; bottom:80px; transform:rotate(-5deg); }
+    .mini-star { position:absolute; color:#a8be8c; font-size:33px; top:44px; left:35px; }
+    .section { padding:100px 0; }
+    .section-alt { background:#f1f3eb; }
+    .section-intro { text-align:center; max-width:680px; margin:0 auto 42px; }
+    h2 { font-size:clamp(32px,3.35vw,46px); line-height:1.18; letter-spacing:-.055em; color:var(--deep); font-weight:800; margin:13px 0 16px; }
+    .section-intro p:last-child { color:#738078; line-height:1.75; font-size:15px; }
+    .approach { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+    .approach-card { background:#fff; border:1px solid #e9ece3; border-radius:21px; padding:32px 28px; }
+    .icon-box { width:52px; height:52px; border-radius:16px; background:#edf1e3; color:#658461; display:grid; place-items:center; margin-bottom:24px; }
+    .icon-box svg { width:25px; height:25px; }
+    h3 { color:#214336; font-size:18px; letter-spacing:-.035em; margin-bottom:10px; }
+    .approach-card p,.service-card p,.step p { font-size:14px; line-height:1.85; color:#718178; margin-bottom:0; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .service-card { position:relative; background:white; border:1px solid #e4e8df; padding:30px 29px; border-radius:22px; transition:transform .2s,box-shadow .2s; display:flex; flex-direction:column; }
+    .service-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+    .service-card.featured { background:var(--forest); color:#e7eee8; border-color:var(--forest); }
+    .service-card.featured h3,.service-card.featured p { color:#e2eee6; }
+    .service-card.featured .service-ico { background:#3d6755; color:#d7eaa7; }
+    .service-card.featured .service-duration { color:#c6d8c6; }
+    .service-card.featured .service-link { color:#deeea9; }
+    .service-ico { background:#f0f3e7; color:#719171; display:grid; place-items:center; border-radius:15px; width:50px; height:50px; margin-bottom:31px; }
+    .service-ico svg { width:24px; height:24px; }
+    .service-card h3 { font-size:21px; margin-bottom:11px; }
+    .service-card p { flex:1; }
+    .service-meta { display:flex; justify-content:space-between; align-items:center; margin:25px 0 20px; border-top:1px solid #e4e8dc; padding-top:20px; }
+    .service-card.featured .service-meta { border-color:#5a7968; }
+    .service-duration { color:#718177; font-weight:700; font-size:12px; }
+    .service-pill { background:#eef3e5; color:#5b7c5f; padding:6px 9px; border-radius:8px; font-size:10px; font-weight:800; }
+    .featured .service-pill { background:#355b48; color:#e5efc6; }
+    .service-link { display:flex; align-items:center; gap:7px; font-size:13px; font-weight:800; color:#326548; width:max-content; }
+    .service-link:hover { text-decoration:underline; }
+    .step-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:50px; }
+    .step { position:relative; padding-left:5px; }
+    .step:not(:last-child):after { content:''; position:absolute; top:25px; right:-15px; width:55%; border-top:1px dashed #c0cfbc; }
+    .step-num { width:53px; height:53px; display:grid; place-items:center; background:#e1eccc; color:#37634a; border-radius:50%; font-family:'Manrope'; font-size:17px; font-weight:800; margin-bottom:25px; }
+    .step h3 { font-size:18px; }
+    .booking-section { padding:94px 0 104px; background:var(--deep); color:white; position:relative; overflow:hidden; }
+    .booking-section:before { content:''; width:500px; height:500px; border:1px solid rgba(186,214,155,.13); border-radius:50%; position:absolute; right:-200px; top:-190px; }
+    .booking-layout { position:relative; display:grid; grid-template-columns:.78fr 1.22fr; gap:65px; align-items:start; }
+    .booking-copy { padding-top:30px; }
+    .booking-copy h2 { color:white; margin-top:20px; }
+    .booking-copy>p { color:#bdd1c4; line-height:1.85; font-size:15px; }
+    .booking-benefits { list-style:none; padding:0; margin:30px 0; display:grid; gap:19px; }
+    .booking-benefits li { display:flex; gap:12px; align-items:center; font-size:13px; color:#d8e8dc; }
+    .booking-benefits svg { width:20px; height:20px; flex:none; color:#c9dba0; }
+    .notice { background:#245042; border:1px solid #3c6755; border-radius:12px; padding:17px; color:#c9dece; font-size:12px; line-height:1.75; }
+    .notice strong { color:white; }
+    .booking-card { background:white; color:var(--ink); border-radius:23px; padding:30px; box-shadow:0 29px 70px rgba(2,22,13,.17); }
+    .booking-card h3 { font-size:22px; margin-bottom:6px; }
+    .booking-sub { color:#819087; font-size:12px; line-height:1.65; margin-bottom:24px; }
+    .booking-label { display:block; font-size:12px; color:#3e5b4b; font-weight:800; margin:21px 0 9px; }
+    .field { height:46px; width:100%; border:1px solid #dfe8df; background:#fff; border-radius:10px; padding:0 12px; color:#365345; outline:none; }
+    .field:focus { border-color:#739c76; box-shadow:0 0 0 3px rgba(126,160,112,.13); }
+    .field::placeholder { color:#9ba89e; }
+    .dates-head { display:flex; justify-content:space-between; align-items:center; margin:23px 0 11px; }
+    .dates-head .booking-label { margin:0; }
+    .date-arrows { display:flex; align-items:center; gap:6px; }
+    .round-btn { border:1px solid #e0e9df; background:white; color:#436550; width:32px; height:32px; border-radius:9px; font-size:19px; display:grid; place-items:center; }
+    .round-btn:disabled { opacity:.33; cursor:not-allowed; }
+    .date-list { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; }
+    .date-btn { border:1px solid #dfe8df; background:white; min-height:65px; border-radius:10px; color:#5f7366; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; }
+    .date-btn span { text-transform:uppercase; font-size:10px; font-weight:800; }
+    .date-btn strong { font-size:18px; color:#365947; }
+    .date-btn.selected,.time-btn.selected { background:var(--forest); border-color:var(--forest); color:white; }
+    .date-btn.selected strong { color:white; }
+    .times { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .time-btn { padding:10px 6px; border:1px solid #dfe8df; border-radius:9px; background:white; color:#54715d; font-size:12px; font-weight:800; }
+    .time-btn:hover,.date-btn:hover { border-color:#9db99e; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+    .tiny { color:#87938a; font-size:11px; line-height:1.6; margin:14px 0; }
+    .consent { display:flex; gap:9px; align-items:start; color:#647669; font-size:11px; line-height:1.6; margin:16px 0 21px; }
+    .consent input { margin-top:2px; accent-color:var(--forest); flex:none; }
+    .booking-submit { width:100%; }
+    .form-alert { display:none; margin-top:15px; border-radius:10px; background:#eef4ea; color:#345843; border:1px solid #d6e6d4; padding:14px; font-size:12px; line-height:1.7; }
+    .form-alert.show { display:block; }
+    .form-alert button { margin-top:10px; color:#246547; border:none; background:transparent; padding:0; text-decoration:underline; font-weight:800; }
+    .whatsapp-btn { background:#20a866; color:white; border-radius:12px; padding:14px 18px; display:inline-flex; align-items:center; justify-content:center; gap:9px; font-weight:800; transition:background .2s; }
+    .whatsapp-btn:hover { background:#168c56; }
+    .whatsapp-btn[aria-disabled="true"] { background:#93b5a4; pointer-events:none; }
+    .whatsapp-box { display:flex; flex-direction:column; gap:10px; margin-top:20px; border-top:1px solid #e2e8df; padding-top:18px; }
+    .whatsapp-box small { color:#718278; font-size:11px; line-height:1.55; }
+    .booking-live { display:none; background:#f1f5e9; padding:21px; border-radius:13px; text-align:center; }
+    .booking-live p { font-size:13px; line-height:1.7; color:#5d6e62; }
+    .faq-grid { display:grid; grid-template-columns:.7fr 1.3fr; gap:65px; }
+    .faq-grid h2 { margin-top:15px; }
+    details { border-bottom:1px solid #dfe7df; padding:20px 0; }
+    details:first-child { border-top:1px solid #dfe7df; }
+    summary { display:flex; justify-content:space-between; gap:20px; cursor:pointer; list-style:none; color:#284f3b; font-weight:800; font-size:14px; }
+    summary::-webkit-details-marker { display:none; }
+    summary:after { content:'+'; font-size:19px; color:#789171; font-weight:500; }
+    details[open] summary:after { content:'−'; }
+    details p { padding-top:14px; color:#718278; font-size:13px; line-height:1.85; margin-bottom:0; }
+    .bottom-cta { background:#e2eccf; border-radius:26px; margin:0 0 80px; padding:48px 58px; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .bottom-cta h2 { max-width:600px; font-size:clamp(26px,2.8vw,37px); margin-bottom:0; }
+    footer { border-top:1px solid #e2e8df; background:#f3f5ee; padding:42px 0 20px; }
+    .footer-main { display:flex; justify-content:space-between; gap:25px; align-items:start; margin-bottom:38px; }
+    .footer-main p { font-size:12px; color:#798a7e; line-height:1.7; max-width:360px; margin:15px 0 0; }
+    .footer-links { display:flex; gap:22px; padding-top:12px; flex-wrap:wrap; }
+    .footer-links a { font-size:12px; font-weight:800; color:#526b5a; }
+    .footer-bottom { display:flex; justify-content:space-between; gap:12px; border-top:1px solid #dce4db; padding-top:18px; font-size:11px; color:#90a092; }
+    .external { text-decoration:underline; text-underline-offset:3px; }
+    @media (max-width:990px) { .navlinks { gap:15px; } .hero-grid { gap:15px; } .hero-art { transform:scale(.85); transform-origin:center; } .booking-layout { gap:30px; grid-template-columns:.75fr 1.25fr; } .hero { padding-top:35px; } .float-top { right:-23px; } }
+    @media (max-width:760px) {
+      .container { width:min(100% - 34px,540px); } .nav { min-height:67px; } .brand { font-size:16px; } .brandmark { width:38px; height:38px; } .nav .nav-cta { display:none; } .mobile-toggle { display:block; }
+      .navlinks { position:absolute; left:0; right:0; top:67px; display:none; flex-direction:column; align-items:stretch; background:var(--cream); border-top:1px solid var(--border); box-shadow:0 20px 30px rgba(20,40,30,.08); padding:16px 24px; gap:0; }
+      .navlinks.open { display:flex; } .navlinks a { padding:13px 0; font-size:14px; }
+      .hero { padding:33px 0 66px; } .hero-grid,.booking-layout,.faq-grid { grid-template-columns:1fr; }
+      .hero-copy { padding:8px 0; } .hero-copy h1 { font-size:clamp(44px,12vw,65px); }
+      .hero-lede { font-size:15px; } .hero-art { transform:none; height:370px; margin:10px auto 0; width:100%; max-width:390px; }
+      .blob { inset:8px 7px; } .plate { width:290px; height:290px; border-width:8px; } .plate-inner { width:235px; height:235px; }
+      .dish-shadow { width:290px; height:290px; } .float-top { right:-5px; top:24px; } .float-bottom { left:-4px; bottom:24px; }
+      .floating { padding:10px 12px; } .floating strong { font-size:10px; } .floating small { font-size:9px; } .float-icon { width:29px; height:29px; }
+      .trust { margin-top:27px; gap:12px; } .trust-item { font-size:11px; }
+      .section { padding:75px 0; } .section-intro { margin-bottom:31px; } .approach,.services-grid,.step-grid { grid-template-columns:1fr; } .approach-card { padding:27px; } .approach { gap:13px; }
+      .step-grid { gap:26px; margin-top:32px; } .step:not(:last-child):after { display:none; } .step-num { margin-bottom:15px; }
+      .booking-section { padding:69px 0; } .booking-copy { padding-top:0; } .booking-layout { gap:24px; } .booking-benefits { gap:11px; margin:23px 0; }
+      .booking-card { padding:20px 16px; border-radius:18px; } .date-list { gap:5px; } .date-btn { min-height:58px; }
+      .faq-grid { gap:14px; } .bottom-cta { margin:0 0 50px; padding:32px 25px; flex-direction:column; align-items:start; border-radius:20px; }
+      .footer-main,.footer-bottom { flex-direction:column; } .footer-main { gap:12px; margin-bottom:23px; } .footer-links { gap:19px; }
+    }
+    @media (max-width:380px) { .hero-art { height:340px; } .plate { width:255px; height:255px; } .plate-inner { width:205px; height:205px; } .dates-head { flex-wrap:wrap; } .contact-grid { grid-template-columns:1fr; } .hero-actions .btn { width:100%; } .date-btn strong { font-size:16px; } }
+    @media (prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <div class="topnote"><span>✳</span> Vista previa del sitio · Agenda automática pendiente de activación</div>
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand" aria-label="Nutrición Consciente, ir al inicio">
+        <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M16 27C7 23 6 14 16 5c10 9 9 18 0 22Z"/><path d="M16 26V10M16 20l-5-4M16 16l5-4"/></svg></span>
+        <span>nutrición<span style="color:#7c9d71">.</span><small>CONSCIENTE</small></span>
+      </a>
+      <nav id="mainNav" class="navlinks" aria-label="Navegación principal">
+        <a href="#enfoque">Mi enfoque</a><a href="#servicios">Consultas</a><a href="#como-funciona">Cómo funciona</a><a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#reservar">Reservar una hora <span aria-hidden="true">↗</span></a>
+      <button id="menuToggle" type="button" class="mobile-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="tag"><span class="dot"></span> UN ESPACIO PARA CUIDAR DE TI</span>
+          <h1>Alimentarte bien. <em>Sentirte mejor.</em></h1>
+          <p class="hero-lede">La nutrición no tiene por qué ser complicada. Construyamos hábitos reales y sostenibles, adaptados a tu vida, a tus tiempos y a tus objetivos.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#reservar">Quiero agendar mi consulta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+            <a class="btn btn-outline" href="#servicios">Conocer las consultas</a>
+          </div>
+          <div class="trust">
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Atención personalizada</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4m8-4v4M3 10h18"/></svg> Agenda flexible</span>
+          </div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Ilustración de un plato saludable con hojas verdes, palta, tomate, vegetales y semillas">
+          <div class="blob"></div><div class="dish-shadow"></div><span class="mini-star">✳</span>
+          <div class="plate"><div class="plate-inner">
+            <svg viewBox="0 0 320 320" aria-hidden="true">
+              <defs><radialGradient id="vegbase"><stop stop-color="#a0c86a"/><stop offset="1" stop-color="#5a8d4f"/></radialGradient><linearGradient id="avocado" x2="1" y2="1"><stop stop-color="#b5d16b"/><stop offset="1" stop-color="#7f9f4e"/></linearGradient></defs>
+              <circle cx="160" cy="160" r="160" fill="#f2ebd9"/>
+              <g opacity=".98">
+                <path d="M50 132Q5 101 32 70Q56 45 94 80Q73 26 111 22Q142 29 136 82Q159 27 192 48Q214 74 176 113Q231 75 252 103Q252 136 192 152Z" fill="#7fa953"/>
+                <path d="M46 224Q-5 208 26 167Q52 154 100 185Q77 135 113 130Q145 143 140 190Q157 133 185 156Q200 179 175 212Q230 194 247 218Q246 250 187 255Z" fill="#5d924c"/>
+                <path d="M177 91Q190 29 223 44Q252 66 220 112Q268 73 288 103Q310 134 256 153Q304 149 296 185Q275 214 245 184Q255 240 215 241Q189 223 200 181Z" fill="#91b65b"/>
+                <path d="M119 250Q80 224 75 262Q82 288 127 278Q144 307 174 283Q184 265 147 250Z" fill="#83a953"/>
+              </g>
+              <g stroke="#d8eb9d" stroke-width="3" stroke-linecap="round" opacity=".72"><path d="m53 86 67 62M103 52l32 85M199 64l-52 88M43 196l77 37M93 156l40 73M251 114l-70 48M270 173l-62-4"/></g>
+              <g transform="rotate(27 93 164)"><ellipse cx="87" cy="165" rx="46" ry="74" fill="#527a3a"/><ellipse cx="87" cy="165" rx="38" ry="65" fill="url(#avocado)"/><ellipse cx="87" cy="168" rx="17" ry="23" fill="#956c46"/><ellipse cx="87" cy="168" rx="12" ry="17" fill="#b98757"/><ellipse cx="83" cy="164" rx="3" ry="5" fill="#cbac77" opacity=".7"/></g>
+              <g><circle cx="216" cy="225" r="45" fill="#d76647"/><circle cx="216" cy="225" r="36" fill="#ed9172"/><path d="M216 190v70m-31-35h62m-54-24 48 48m0-48-48 48" stroke="#fbd0a6" stroke-width="4"/><circle cx="216" cy="225" r="9" fill="#e9b680"/></g>
+              <g transform="rotate(-12 210 114)"><ellipse cx="211" cy="116" rx="38" ry="47" fill="#ecd9ac"/><ellipse cx="211" cy="116" rx="33" ry="42" fill="#e6cf91"/><path d="M177 117q33-20 67 0M186 98q27 11 50 0M189 140q23-12 46 0" stroke="#c5ad79" stroke-width="2" fill="none"/></g>
+              <g fill="#f9eee0"><circle cx="151" cy="250" r="5"/><circle cx="164" cy="267" r="4"/><circle cx="187" cy="255" r="3"/><circle cx="153" cy="85" r="4"/><circle cx="161" cy="74" r="3"/></g>
+              <g fill="#744e34"><ellipse cx="161" cy="208" rx="2" ry="4" transform="rotate(26 161 208)"/><ellipse cx="173" cy="217" rx="2" ry="4" transform="rotate(-25 173 217)"/><ellipse cx="155" cy="228" rx="2" ry="4"/><ellipse cx="142" cy="216" rx="2" ry="4"/><ellipse cx="177" cy="192" rx="2" ry="4"/><ellipse cx="252" cy="190" rx="2" ry="4"/></g>
+            </svg>
+          </div></div>
+          <div class="floating float-top"><span class="float-icon">♡</span><span><strong>Tu bienestar importa</strong><small>Hábitos con sentido</small></span></div>
+          <div class="floating float-bottom"><span class="float-icon">✳</span><span><strong>A tu propio ritmo</strong><small>Sin exigencias extremas</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enfoque" class="section section-alt">
+      <div class="container">
+        <div class="section-intro"><span class="eyebrow">UNA FORMA DISTINTA DE ACOMPAÑARTE</span><h2>Tu salud es mucho más que un número</h2><p>Cada persona es diferente. Por eso, el plan debe adaptarse a ti y no al revés.</p></div>
+        <div class="approach">
+          <article class="approach-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s-8-4.4-8-11a4.5 4.5 0 0 1 8-2.7A4.5 4.5 0 0 1 20 10c0 6.6-8 11-8 11Z"/></svg></div><h3>Sin culpas ni restricciones</h3><p>Un enfoque flexible para mejorar tu relación con la alimentación, sin reglas imposibles.</p></article>
+          <article class="approach-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21v-2a7.5 7.5 0 0 1 15 0v2"/></svg></div><h3>Hecho para ti</h3><p>Consideramos tus gustos, horarios, contexto y necesidades al definir objetivos y acciones.</p></article>
+          <article class="approach-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m4 15 5-5 4 4 7-8"/><path d="M15 6h5v5"/></svg></div><h3>Cambios que perduran</h3><p>Avanzamos paso a paso para construir hábitos que puedas mantener en el tiempo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="section">
+      <div class="container">
+        <div class="section-intro"><span class="eyebrow">CONSULTAS NUTRICIONALES</span><h2>Elige cómo quieres comenzar</h2><p>Opciones de atención para acompañarte en distintas etapas de tu proceso.</p></div>
+        <div class="services-grid">
+          <article class="service-card"><div class="service-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Primera consulta</h3><p>Conversamos sobre tus objetivos, hábitos, alimentación actual y necesidades para definir un punto de partida.</p><div class="service-meta"><span class="service-duration">60 min aprox.</span><span class="service-pill">Para comenzar</span></div><a href="#reservar" class="service-link" data-service="Primera consulta">Agendar consulta <span aria-hidden="true">→</span></a></article>
+          <article class="service-card featured"><div class="service-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Control nutricional</h3><p>Revisamos tus avances, resolvemos dificultades y ajustamos las estrategias para seguir adelante.</p><div class="service-meta"><span class="service-duration">40 min aprox.</span><span class="service-pill">Seguimiento</span></div><a href="#reservar" class="service-link" data-service="Control nutricional">Agendar control <span aria-hidden="true">→</span></a></article>
+          <article class="service-card"><div class="service-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="m10 9 6 3-6 3V9Z"/></svg></div><h3>Consulta online</h3><p>Recibe orientación nutricional desde donde estés, con la comodidad de una videollamada.</p><div class="service-meta"><span class="service-duration">50 min aprox.</span><span class="service-pill">A distancia</span></div><a href="#reservar" class="service-link" data-service="Consulta online">Agendar online <span aria-hidden="true">→</span></a></article>
+        </div>
+        <p class="tiny" style="text-align:center;margin-top:20px">* Servicios y duraciones de ejemplo: deben ajustarse a la oferta real de la profesional.</p>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section section-alt">
+      <div class="container">
+        <div class="section-intro"><span class="eyebrow">FÁCIL Y SIN COMPLICACIONES</span><h2>Dar el primer paso es simple</h2><p>Una experiencia de atención clara, desde tu primera consulta hasta el seguimiento.</p></div>
+        <div class="step-grid">
+          <div class="step"><span class="step-num">01</span><h3>Elige tu consulta</h3><p>Selecciona el tipo de atención que se ajuste a lo que necesitas.</p></div>
+          <div class="step"><span class="step-num">02</span><h3>Solicita un horario</h3><p>Explora la agenda de ejemplo. Todavía no se confirman horas desde este sitio.</p></div>
+          <div class="step"><span class="step-num">03</span><h3>Comencemos</h3><p>Cuando activemos el sistema, recibirás un código de confirmación de tu reserva.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="reservar">
+      <div class="container booking-layout">
+        <div class="booking-copy">
+          <span class="eyebrow eyebrow-light">TU PRÓXIMO PASO</span><h2>Un pequeño cambio puede ser el comienzo de algo grande.</h2><p>Esta es una demostración visual. La agenda real se habilitará al conectar el sistema de reservas y configurar el WhatsApp profesional.</p>
+          <ul class="booking-benefits">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Agenda en pocos pasos</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Consultas online o presenciales</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Acompañamiento personalizado</li>
+          </ul>
+          <div class="notice" id="demoNote"><strong>Agenda en demostración.</strong> Los horarios son ilustrativos. Por ahora no se pueden confirmar citas.</div>
+        </div>
+        <div class="booking-card">
+          <h3>Agenda tu consulta <span aria-hidden="true">✳</span></h3>
+          <p class="booking-sub" id="bookingSubtitle">Vista previa de horarios. La confirmación estará disponible cuando se active la agenda.</p>
+          <form id="bookingForm" novalidate>
+            <label class="booking-label" for="service">1. Tipo de consulta</label>
+            <select class="field" id="service" name="service" required><option value="Primera consulta">Primera consulta — aprox. 60 min</option><option value="Control nutricional">Control nutricional — aprox. 40 min</option><option value="Consulta online">Consulta online — aprox. 50 min</option></select>
+            <div class="dates-head"><label class="booking-label" id="dateLabel">2. Selecciona un día disponible</label><div class="date-arrows"><button type="button" class="round-btn" id="prevDates" aria-label="Días anteriores">‹</button><button type="button" class="round-btn" id="nextDates" aria-label="Días siguientes">›</button></div></div>
+            <div class="date-list" id="dateList" role="group" aria-labelledby="dateLabel"></div>
+            <label class="booking-label" id="timeLabel">3. Horarios disponibles (Chile)</label>
+            <div class="times" id="timeList" role="group" aria-labelledby="timeLabel"></div>
+            <label class="booking-label" for="fullname">4. Tus datos de contacto</label>
+            <input class="field" id="fullname" name="fullname" placeholder="Nombre y apellido" autocomplete="name" required maxlength="100" />
+            <div class="contact-grid" style="margin-top:10px"><input class="field" id="email" name="email" type="email" placeholder="Correo electrónico" autocomplete="email" required maxlength="120" /><input class="field" id="phone" name="phone" type="tel" placeholder="Teléfono o WhatsApp" autocomplete="tel" required maxlength="25" /></div>
+            <label class="booking-label" for="mode">Modalidad preferida</label>
+            <select class="field" id="mode" name="mode"><option>Presencial</option><option>Online</option></select>
+            <label class="consent"><input type="checkbox" id="consent" required /><span>Autorizo el uso de mis datos de contacto para gestionar esta reserva. No incluiré antecedentes clínicos. He leído las condiciones de reserva.</span></label><input id="website" style="display:none" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn btn-primary booking-submit" type="submit" id="submitButton" disabled>Reservas aún no habilitadas <span aria-hidden="true">→</span></button>
+            <p class="tiny">No ingreses datos personales en esta demostración: no se gestionan reservas.</p>
+            <div class="form-alert" role="status" aria-live="polite" id="formAlert"></div>
+            <div class="whatsapp-box"><a class="whatsapp-btn" href="#reservar" id="whatsappButton" target="_blank" rel="noopener noreferrer" aria-disabled="true">✳ &nbsp; Consultar por WhatsApp</a><small id="waNote">Completa el número profesional en la configuración para habilitar WhatsApp. La conversación no genera una reserva por sí sola.</small></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="preguntas">
+      <div class="container faq-grid">
+        <div><span class="eyebrow">RESOLVEMOS TUS DUDAS</span><h2>Preguntas frecuentes</h2><p style="font-size:14px;color:#718278;line-height:1.9">Aquí encontrarás información útil antes de tu primera consulta.</p></div>
+        <div>
+          <details><summary>¿Necesito prepararme antes de mi primera consulta?</summary><p>La profesional te indicará si debes llevar antecedentes relevantes o realizar alguna preparación. No envíes información clínica por este formulario.</p></details>
+          <details><summary>¿Puedo atenderme de forma online?</summary><p>Sí, esta plantilla incluye la opción de consulta online. Confirma que la profesional ofrezca esta modalidad y qué plataforma utiliza.</p></details>
+          <details><summary>¿Cómo sé si mi hora quedó confirmada?</summary><p>Al finalizar recibirás un código de reserva. La hora queda bloqueada automáticamente cuando el sitio se publica con su servidor de reservas activo. En la vista previa no se realizan reservas.</p></details>
+          <details><summary>¿Qué pasa si necesito cambiar mi hora?</summary><p>Escríbele por WhatsApp a la profesional indicando tu código de reserva. La profesional puede anular una hora desde su panel de administración.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><div class="bottom-cta"><div><span class="eyebrow">EMPIEZA HOY</span><h2>Tu camino hacia una alimentación más tranquila comienza aquí.</h2></div><a class="btn btn-primary" href="#reservar">Elegir mi primera consulta <span aria-hidden="true">↗</span></a></div></div>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-main"><div><a href="#inicio" class="brand"><span class="brandmark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M16 27C7 23 6 14 16 5c10 9 9 18 0 22Z"/><path d="M16 26V10M16 20l-5-4M16 16l5-4"/></svg></span><span>nutrición<span style="color:#7c9d71">.</span><small>CONSCIENTE</small></span></a><p>Un espacio para cuidar de ti a través de una alimentación cercana, flexible y sostenible.</p></div><div class="footer-links"><a href="#servicios">Consultas</a><a href="#enfoque">Enfoque</a><a href="#reservar">Agendar</a><a href="#preguntas">Preguntas frecuentes</a></div></div>
+      <div class="footer-bottom"><span>© <span id="currentYear"></span> Nutrición Consciente · Vista previa · Agenda sin activar</span><span>Hecho con cuidado ♡ · Chile</span></div>
+    </div>
+  </footer>
+  <script>
+    // Reservas reales vía /api/bookings + bloqueo de horario en SQLite.
+    // Abriendo solo index.html: modo vista previa SIN confirmación de citas.
+    const $ = (selector) => document.querySelector(selector);
+    const form = $('#bookingForm'), menu = $('#mainNav');
+    const dateList = $('#dateList'), timeList = $('#timeList');
+    const previewTimes=['09:00','10:30','12:00','15:00','16:30','18:00'];
+    let cfg={ professionalName:'Nutrición Consciente',whatsappNumber:'' };
+    let serverReady=false, dates=[],dateOffset=0,selectedDate=null,selectedTime=null,latestRequest=0;
+    $('#currentYear').textContent=new Date().getFullYear();
+    $('#menuToggle').addEventListener('click',()=>{ const active=menu.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(active)); });
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');}));
+    document.querySelectorAll('[data-service]').forEach(a=>a.addEventListener('click',()=>{$('#service').value=a.dataset.service;$('#mode').value=a.dataset.service==='Consulta online'?'Online':'Presencial';}));
+    $('#service').addEventListener('change',e=>{if(e.target.value==='Consulta online')$('#mode').value='Online';});
+    const iso=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+    const niceDate=d=>new Intl.DateTimeFormat('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);
+    const alertBox=$('#formAlert');
+    function alertMsg(message,isError=false,extras=null){alertBox.replaceChildren();alertBox.classList.add('show');alertBox.style.background=isError?'#fff1ed':'#eef4ea';alertBox.style.color=isError?'#943f32':'#345843';const div=document.createElement('div');div.textContent=message;alertBox.append(div);if(extras)alertBox.append(extras);}
+    function note(message,active=false){$('#demoNote').textContent='';const b=document.createElement('strong');b.textContent=active?'Agenda activa. ':'Vista previa. ';$('#demoNote').append(b,document.createTextNode(message));}
+    function buildDates(){dates=[];let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+1);
+      for(let i=0;dates.length<30 && i<65;i++){const day=new Date(d);day.setDate(d.getDate()+i);if(day.getDay()!==0&&day.getDay()!==6)dates.push(day);}
+      selectedDate=dates[0]||null;drawDates();refreshTimes();}
+    function drawDates(){dateList.replaceChildren();dates.slice(dateOffset,dateOffset+6).forEach(date=>{
+      const b=document.createElement('button');b.type='button';b.className='date-btn'+(selectedDate&&iso(date)===iso(selectedDate)?' selected':'');
+      b.setAttribute('aria-pressed',String(!!selectedDate&&iso(date)===iso(selectedDate)));b.setAttribute('aria-label',niceDate(date));
+      const d=document.createElement('span');d.textContent=new Intl.DateTimeFormat('es-CL',{weekday:'short'}).format(date).replace('.','');
+      const n=document.createElement('strong');n.textContent=String(date.getDate());b.append(d,n);
+      b.addEventListener('click',()=>{selectedDate=date;selectedTime=null;drawDates();refreshTimes();});dateList.append(b);});
+      $('#prevDates').disabled=dateOffset===0;$('#nextDates').disabled=dateOffset+6>=dates.length;
+    }
+    function drawTimes(times,warning=''){
+      timeList.replaceChildren();if(!times.length){const p=document.createElement('p');p.className='tiny';p.textContent=warning||'No hay horarios disponibles para este día.';timeList.append(p);}
+      for(const t of times){const b=document.createElement('button');b.type='button';b.className='time-btn'+(t===selectedTime?' selected':'');b.textContent=t;
+        b.setAttribute('aria-pressed',String(t===selectedTime));b.addEventListener('click',()=>{selectedTime=t;drawTimes(times);$('#submitButton').disabled=!serverReady;});timeList.append(b);}
+      $('#submitButton').disabled=!serverReady||!selectedTime;
+    }
+    async function refreshTimes(){
+      const req=++latestRequest;selectedTime=null;$('#submitButton').disabled=true;
+      if(!selectedDate){drawTimes([]);return;}
+      if(!serverReady){drawTimes(previewTimes,'Vista previa: las horas son ilustrativas.');return;}
+      drawTimes([],'Consultando horarios disponibles…');
+      try{const response=await fetch('/api/availability?date='+encodeURIComponent(iso(selectedDate)),{cache:'no-store'});if(!response.ok)throw Error('La agenda no responde');const result=await response.json();if(req!==latestRequest)return;drawTimes(result.available);}
+      catch(e){if(req!==latestRequest)return;serverReady=false;note('Sin conexión al servidor; las reservas están deshabilitadas.');drawTimes(previewTimes);}
+    }
+    $('#prevDates').addEventListener('click',()=>{dateOffset=Math.max(0,dateOffset-6);selectedDate=dates[dateOffset];drawDates();refreshTimes();});
+    $('#nextDates').addEventListener('click',()=>{dateOffset=Math.min(dates.length-6,dateOffset+6);selectedDate=dates[dateOffset];drawDates();refreshTimes();});
+    function whatsappLink(text){const digits=String(cfg.whatsappNumber||'').replace(/\D/g,'');return /^\d{9,15}$/.test(digits)?'https://wa.me/'+digits+'?text='+encodeURIComponent(text):'';}
+    function configureWhatsapp(){const url=whatsappLink('Hola, quiero consultar por una atención nutricional con '+cfg.professionalName+'.');const b=$('#whatsappButton');if(url){b.href=url;b.removeAttribute('aria-disabled');$('#waNote').textContent='Puedes preguntar por WhatsApp antes de reservar. Escribir por WhatsApp no bloquea un cupo.';}else{b.href='#reservar';b.setAttribute('aria-disabled','true');$('#waNote').textContent='WhatsApp se habilitará al configurar el número profesional.';}}
+    async function start(){note('GitHub Pages muestra una demostración, no confirma citas. Activa el servidor de reservas antes de atender pacientes.');configureWhatsapp();buildDates();document.querySelectorAll('#fullname,#email,#phone,#consent').forEach(el=>el.disabled=true);}
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();if(!serverReady){alertMsg('La agenda todavía no está conectada; no se ha generado ninguna reserva.',true);return;}
+      if(!selectedDate||!selectedTime){alertMsg('Selecciona un día y una hora.',true);return;}
+      const fields=[...form.querySelectorAll('input[required],select[required]')];for(const field of fields){if(!field.checkValidity()){field.reportValidity();return;}}
+      const button=$('#submitButton');button.disabled=true;button.textContent='Confirmando horario…';
+      const data={day:iso(selectedDate),time:selectedTime,service:$('#service').value,modality:$('#mode').value,fullName:$('#fullname').value.trim(),email:$('#email').value.trim(),phone:$('#phone').value.trim(),consent:$('#consent').checked,website:$('#website').value};
+      try{const r=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await r.json();if(!r.ok)throw Error(result.error||'No se pudo reservar');
+        const message='Tu hora quedó CONFIRMADA para el '+niceDate(selectedDate)+' a las '+selectedTime+' (hora de Chile). Código: '+result.reference+'. Guarda este código para futuras consultas.';
+        const box=document.createElement('div');const wa=whatsappLink('Hola, soy '+data.fullName+'. Reservé '+data.service+' para '+data.day+' a las '+data.time+'. Mi código es '+result.reference+'.');
+        if(wa){const link=document.createElement('a');link.className='whatsapp-btn';link.style.marginTop='10px';link.href=wa;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Enviar datos de mi reserva por WhatsApp ↗';box.append(link);}
+        alertMsg(message,false,box);form.reset();selectedTime=null;await refreshTimes();alertBox.scrollIntoView({behavior:'smooth',block:'center'});
+      }catch(err){alertMsg(err.message+' Si el horario fue tomado, selecciona otro.',true);await refreshTimes();}
+      finally{button.textContent='Confirmar reserva automática →';button.disabled=!serverReady||!selectedTime;}
+    });
+    start();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+LANDING DE NUTRICIONISTA PARA GITHUB PAGES
+
+1. En GitHub, abre claudio14-tech/nutricionista-reservas.
+2. Elige Add file > Upload files.
+3. Sube index.html, favicon.svg y .nojekyll (descomprime este ZIP primero).
+4. Pulsa Commit changes.
+5. En Settings > Pages selecciona Source: Deploy from a branch, main y /(root); Save.
+6. GitHub mostrará el enlace publicado en Settings > Pages.
+
+ATENCIÓN: esta versión de GitHub Pages es una DEMOSTRACIÓN estática. No acepta ni confirma reservas. No contiene servidor ni base de datos, no guarda datos personales. WhatsApp está sin número.
+
+Para reservas automáticas reales, necesitas el servidor Node.js (incluido en el paquete original), una base de datos persistente y un servicio de hosting compatible.
+
+Para habilitar solo el botón WhatsApp en esta demostración, edita index.html y cambia whatsappNumber:'' por whatsappNumber:'569XXXXXXXX' usando el número real de la profesional.
