@@ -193,10 +193,13 @@
     }
     @media (max-width:380px) { .hero-art { height:340px; } .plate { width:255px; height:255px; } .plate-inner { width:205px; height:205px; } .dates-head { flex-wrap:wrap; } .contact-grid { grid-template-columns:1fr; } .hero-actions .btn { width:100%; } .date-btn strong { font-size:16px; } }
     @media (prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; } }
+    .google-calendar-frame {display:block;width:100%;border:0;border-radius:12px;background:#fff;min-height:620px}
+    .booking-calendar-link {display:inline-flex;justify-content:center;align-items:center;margin-top:14px;width:100%}
+    @media (max-width:720px){.google-calendar-frame{height:810px !important;min-height:810px}.calendar-booking-card{padding:18px 12px}.booking-calendar-link{font-size:14px}}
   </style>
 </head>
 <body>
-  <div class="topnote"><span>✳</span> Vista previa del sitio · Agenda automática pendiente de activación</div>
+  <div class="topnote"><span>✳</span> Agenda online disponible · Reserva con Google Calendar</div>
   <header>
     <div class="container nav">
       <a href="#inicio" class="brand" aria-label="Nutrición Consciente, ir al inicio">
@@ -282,7 +285,7 @@
         <div class="step-grid">
           <div class="step"><span class="step-num">01</span><h3>Elige tu consulta</h3><p>Selecciona el tipo de atención que se ajuste a lo que necesitas.</p></div>
           <div class="step"><span class="step-num">02</span><h3>Solicita un horario</h3><p>Explora la agenda de ejemplo. Todavía no se confirman horas desde este sitio.</p></div>
-          <div class="step"><span class="step-num">03</span><h3>Comencemos</h3><p>Cuando activemos el sistema, recibirás un código de confirmación de tu reserva.</p></div>
+          <div class="step"><span class="step-num">03</span><h3>Comencemos</h3><p>Elige una hora disponible en Google Calendar y recibe la confirmación de la cita.</p></div>
         </div>
       </div>
     </section>
@@ -290,35 +293,34 @@
     <section class="booking-section" id="reservar">
       <div class="container booking-layout">
         <div class="booking-copy">
-          <span class="eyebrow eyebrow-light">TU PRÓXIMO PASO</span><h2>Un pequeño cambio puede ser el comienzo de algo grande.</h2><p>Esta es una demostración visual. La agenda real se habilitará al conectar el sistema de reservas y configurar el WhatsApp profesional.</p>
+          <span class="eyebrow eyebrow-light">TU PRÓXIMO PASO</span><h2>Un pequeño cambio puede ser el comienzo de algo grande.</h2><p>Reserva directamente en la agenda de Google Calendar. Verás los horarios disponibles y recibirás la confirmación desde Google.</p>
           <ul class="booking-benefits">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Agenda en pocos pasos</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Consultas online o presenciales</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 5 5L20 6"/></svg> Acompañamiento personalizado</li>
           </ul>
-          <div class="notice" id="demoNote"><strong>Agenda en demostración.</strong> Los horarios son ilustrativos. Por ahora no se pueden confirmar citas.</div>
+          <div class="notice"><strong>Reserva gestionada por Google Calendar.</strong> Los horarios y tipos de atención disponibles dependen de la agenda de la profesional. Los datos se ingresan en Google, no en esta web.</div>
         </div>
-        <div class="booking-card">
+        <div class="booking-card calendar-booking-card">
           <h3>Agenda tu consulta <span aria-hidden="true">✳</span></h3>
-          <p class="booking-sub" id="bookingSubtitle">Vista previa de horarios. La confirmación estará disponible cuando se active la agenda.</p>
-          <form id="bookingForm" novalidate>
-            <label class="booking-label" for="service">1. Tipo de consulta</label>
-            <select class="field" id="service" name="service" required><option value="Primera consulta">Primera consulta — aprox. 60 min</option><option value="Control nutricional">Control nutricional — aprox. 40 min</option><option value="Consulta online">Consulta online — aprox. 50 min</option></select>
-            <div class="dates-head"><label class="booking-label" id="dateLabel">2. Selecciona un día disponible</label><div class="date-arrows"><button type="button" class="round-btn" id="prevDates" aria-label="Días anteriores">‹</button><button type="button" class="round-btn" id="nextDates" aria-label="Días siguientes">›</button></div></div>
-            <div class="date-list" id="dateList" role="group" aria-labelledby="dateLabel"></div>
-            <label class="booking-label" id="timeLabel">3. Horarios disponibles (Chile)</label>
-            <div class="times" id="timeList" role="group" aria-labelledby="timeLabel"></div>
-            <label class="booking-label" for="fullname">4. Tus datos de contacto</label>
-            <input class="field" id="fullname" name="fullname" placeholder="Nombre y apellido" autocomplete="name" required maxlength="100" />
-            <div class="contact-grid" style="margin-top:10px"><input class="field" id="email" name="email" type="email" placeholder="Correo electrónico" autocomplete="email" required maxlength="120" /><input class="field" id="phone" name="phone" type="tel" placeholder="Teléfono o WhatsApp" autocomplete="tel" required maxlength="25" /></div>
-            <label class="booking-label" for="mode">Modalidad preferida</label>
-            <select class="field" id="mode" name="mode"><option>Presencial</option><option>Online</option></select>
-            <label class="consent"><input type="checkbox" id="consent" required /><span>Autorizo el uso de mis datos de contacto para gestionar esta reserva. No incluiré antecedentes clínicos. He leído las condiciones de reserva.</span></label><input id="website" style="display:none" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <button class="btn btn-primary booking-submit" type="submit" id="submitButton" disabled>Reservas aún no habilitadas <span aria-hidden="true">→</span></button>
-            <p class="tiny">No ingreses datos personales en esta demostración: no se gestionan reservas.</p>
-            <div class="form-alert" role="status" aria-live="polite" id="formAlert"></div>
-            <div class="whatsapp-box"><a class="whatsapp-btn" href="#reservar" id="whatsappButton" target="_blank" rel="noopener noreferrer" aria-disabled="true">✳ &nbsp; Consultar por WhatsApp</a><small id="waNote">Completa el número profesional en la configuración para habilitar WhatsApp. La conversación no genera una reserva por sí sola.</small></div>
-          </form>
+          <p class="booking-sub">Selecciona un horario disponible y completa tu reserva en Google Calendar. Si no carga aquí, puedes abrir la agenda en una pestaña nueva.</p>
+          <iframe
+            class="google-calendar-frame"
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3vVjXr6hdd0lFC7kTZXYx1jiz-6tekfsDSnAmmzxtZyLEsP-VhdMWs5Gh4v7-wKPS33O6R7z82?gv=true"
+            title="Reserva una consulta nutricional mediante Google Calendar"
+            width="100%"
+            height="740"
+            frameborder="0"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            style="border:0;width:100%;height:740px"
+          ></iframe>
+          <a class="btn btn-primary booking-calendar-link" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3vVjXr6hdd0lFC7kTZXYx1jiz-6tekfsDSnAmmzxtZyLEsP-VhdMWs5Gh4v7-wKPS33O6R7z82?gv=true" target="_blank" rel="noopener noreferrer">Abrir agenda de reservas <span aria-hidden="true">↗</span></a>
+          <p class="tiny">Las reservas, confirmaciones y cambios se gestionan desde Google Calendar. No envíes información clínica por WhatsApp.</p>
+          <div class="whatsapp-box" id="whatsappBox">
+            <a class="whatsapp-btn" href="#reservar" id="whatsappButton" target="_blank" rel="noopener noreferrer" aria-disabled="true">✳ &nbsp; Consultar por WhatsApp</a>
+            <small id="waNote">WhatsApp estará disponible cuando se configure el número profesional. Una conversación no reserva una hora.</small>
+          </div>
         </div>
       </div>
     </section>
@@ -329,8 +331,8 @@
         <div>
           <details><summary>¿Necesito prepararme antes de mi primera consulta?</summary><p>La profesional te indicará si debes llevar antecedentes relevantes o realizar alguna preparación. No envíes información clínica por este formulario.</p></details>
           <details><summary>¿Puedo atenderme de forma online?</summary><p>Sí, esta plantilla incluye la opción de consulta online. Confirma que la profesional ofrezca esta modalidad y qué plataforma utiliza.</p></details>
-          <details><summary>¿Cómo sé si mi hora quedó confirmada?</summary><p>Al finalizar recibirás un código de reserva. La hora queda bloqueada automáticamente cuando el sitio se publica con su servidor de reservas activo. En la vista previa no se realizan reservas.</p></details>
-          <details><summary>¿Qué pasa si necesito cambiar mi hora?</summary><p>Escríbele por WhatsApp a la profesional indicando tu código de reserva. La profesional puede anular una hora desde su panel de administración.</p></details>
+          <details><summary>¿Cómo sé si mi hora quedó confirmada?</summary><p>Google Calendar mostrará la confirmación al finalizar la reserva y enviará los datos de la cita al correo electrónico que ingreses.</p></details>
+          <details><summary>¿Qué pasa si necesito cambiar mi hora?</summary><p>Consulta el mensaje de confirmación enviado por Google Calendar para ver las opciones disponibles de cancelación o reprogramación. También puedes contactar a la profesional cuando esté habilitado WhatsApp.</p></details>
         </div>
       </div>
     </section>
@@ -340,73 +342,38 @@
   <footer>
     <div class="container">
       <div class="footer-main"><div><a href="#inicio" class="brand"><span class="brandmark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M16 27C7 23 6 14 16 5c10 9 9 18 0 22Z"/><path d="M16 26V10M16 20l-5-4M16 16l5-4"/></svg></span><span>nutrición<span style="color:#7c9d71">.</span><small>CONSCIENTE</small></span></a><p>Un espacio para cuidar de ti a través de una alimentación cercana, flexible y sostenible.</p></div><div class="footer-links"><a href="#servicios">Consultas</a><a href="#enfoque">Enfoque</a><a href="#reservar">Agendar</a><a href="#preguntas">Preguntas frecuentes</a></div></div>
-      <div class="footer-bottom"><span>© <span id="currentYear"></span> Nutrición Consciente · Vista previa · Agenda sin activar</span><span>Hecho con cuidado ♡ · Chile</span></div>
+      <div class="footer-bottom"><span>© <span id="currentYear"></span> Nutrición Consciente · Reservas con Google Calendar</span><span>Hecho con cuidado ♡ · Chile</span></div>
     </div>
   </footer>
   <script>
-    // Reservas reales vía /api/bookings + bloqueo de horario en SQLite.
-    // Abriendo solo index.html: modo vista previa SIN confirmación de citas.
-    const $ = (selector) => document.querySelector(selector);
-    const form = $('#bookingForm'), menu = $('#mainNav');
-    const dateList = $('#dateList'), timeList = $('#timeList');
-    const previewTimes=['09:00','10:30','12:00','15:00','16:30','18:00'];
-    let cfg={ professionalName:'Nutrición Consciente',whatsappNumber:'' };
-    let serverReady=false, dates=[],dateOffset=0,selectedDate=null,selectedTime=null,latestRequest=0;
-    $('#currentYear').textContent=new Date().getFullYear();
-    $('#menuToggle').addEventListener('click',()=>{ const active=menu.classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(active)); });
-    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');}));
-    document.querySelectorAll('[data-service]').forEach(a=>a.addEventListener('click',()=>{$('#service').value=a.dataset.service;$('#mode').value=a.dataset.service==='Consulta online'?'Online':'Presencial';}));
-    $('#service').addEventListener('change',e=>{if(e.target.value==='Consulta online')$('#mode').value='Online';});
-    const iso=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
-    const niceDate=d=>new Intl.DateTimeFormat('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);
-    const alertBox=$('#formAlert');
-    function alertMsg(message,isError=false,extras=null){alertBox.replaceChildren();alertBox.classList.add('show');alertBox.style.background=isError?'#fff1ed':'#eef4ea';alertBox.style.color=isError?'#943f32':'#345843';const div=document.createElement('div');div.textContent=message;alertBox.append(div);if(extras)alertBox.append(extras);}
-    function note(message,active=false){$('#demoNote').textContent='';const b=document.createElement('strong');b.textContent=active?'Agenda activa. ':'Vista previa. ';$('#demoNote').append(b,document.createTextNode(message));}
-    function buildDates(){dates=[];let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+1);
-      for(let i=0;dates.length<30 && i<65;i++){const day=new Date(d);day.setDate(d.getDate()+i);if(day.getDay()!==0&&day.getDay()!==6)dates.push(day);}
-      selectedDate=dates[0]||null;drawDates();refreshTimes();}
-    function drawDates(){dateList.replaceChildren();dates.slice(dateOffset,dateOffset+6).forEach(date=>{
-      const b=document.createElement('button');b.type='button';b.className='date-btn'+(selectedDate&&iso(date)===iso(selectedDate)?' selected':'');
-      b.setAttribute('aria-pressed',String(!!selectedDate&&iso(date)===iso(selectedDate)));b.setAttribute('aria-label',niceDate(date));
-      const d=document.createElement('span');d.textContent=new Intl.DateTimeFormat('es-CL',{weekday:'short'}).format(date).replace('.','');
-      const n=document.createElement('strong');n.textContent=String(date.getDate());b.append(d,n);
-      b.addEventListener('click',()=>{selectedDate=date;selectedTime=null;drawDates();refreshTimes();});dateList.append(b);});
-      $('#prevDates').disabled=dateOffset===0;$('#nextDates').disabled=dateOffset+6>=dates.length;
-    }
-    function drawTimes(times,warning=''){
-      timeList.replaceChildren();if(!times.length){const p=document.createElement('p');p.className='tiny';p.textContent=warning||'No hay horarios disponibles para este día.';timeList.append(p);}
-      for(const t of times){const b=document.createElement('button');b.type='button';b.className='time-btn'+(t===selectedTime?' selected':'');b.textContent=t;
-        b.setAttribute('aria-pressed',String(t===selectedTime));b.addEventListener('click',()=>{selectedTime=t;drawTimes(times);$('#submitButton').disabled=!serverReady;});timeList.append(b);}
-      $('#submitButton').disabled=!serverReady||!selectedTime;
-    }
-    async function refreshTimes(){
-      const req=++latestRequest;selectedTime=null;$('#submitButton').disabled=true;
-      if(!selectedDate){drawTimes([]);return;}
-      if(!serverReady){drawTimes(previewTimes,'Vista previa: las horas son ilustrativas.');return;}
-      drawTimes([],'Consultando horarios disponibles…');
-      try{const response=await fetch('/api/availability?date='+encodeURIComponent(iso(selectedDate)),{cache:'no-store'});if(!response.ok)throw Error('La agenda no responde');const result=await response.json();if(req!==latestRequest)return;drawTimes(result.available);}
-      catch(e){if(req!==latestRequest)return;serverReady=false;note('Sin conexión al servidor; las reservas están deshabilitadas.');drawTimes(previewTimes);}
-    }
-    $('#prevDates').addEventListener('click',()=>{dateOffset=Math.max(0,dateOffset-6);selectedDate=dates[dateOffset];drawDates();refreshTimes();});
-    $('#nextDates').addEventListener('click',()=>{dateOffset=Math.min(dates.length-6,dateOffset+6);selectedDate=dates[dateOffset];drawDates();refreshTimes();});
-    function whatsappLink(text){const digits=String(cfg.whatsappNumber||'').replace(/\D/g,'');return /^\d{9,15}$/.test(digits)?'https://wa.me/'+digits+'?text='+encodeURIComponent(text):'';}
-    function configureWhatsapp(){const url=whatsappLink('Hola, quiero consultar por una atención nutricional con '+cfg.professionalName+'.');const b=$('#whatsappButton');if(url){b.href=url;b.removeAttribute('aria-disabled');$('#waNote').textContent='Puedes preguntar por WhatsApp antes de reservar. Escribir por WhatsApp no bloquea un cupo.';}else{b.href='#reservar';b.setAttribute('aria-disabled','true');$('#waNote').textContent='WhatsApp se habilitará al configurar el número profesional.';}}
-    async function start(){note('GitHub Pages muestra una demostración, no confirma citas. Activa el servidor de reservas antes de atender pacientes.');configureWhatsapp();buildDates();document.querySelectorAll('#fullname,#email,#phone,#consent').forEach(el=>el.disabled=true);}
-    form.addEventListener('submit',async e=>{
-      e.preventDefault();if(!serverReady){alertMsg('La agenda todavía no está conectada; no se ha generado ninguna reserva.',true);return;}
-      if(!selectedDate||!selectedTime){alertMsg('Selecciona un día y una hora.',true);return;}
-      const fields=[...form.querySelectorAll('input[required],select[required]')];for(const field of fields){if(!field.checkValidity()){field.reportValidity();return;}}
-      const button=$('#submitButton');button.disabled=true;button.textContent='Confirmando horario…';
-      const data={day:iso(selectedDate),time:selectedTime,service:$('#service').value,modality:$('#mode').value,fullName:$('#fullname').value.trim(),email:$('#email').value.trim(),phone:$('#phone').value.trim(),consent:$('#consent').checked,website:$('#website').value};
-      try{const r=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await r.json();if(!r.ok)throw Error(result.error||'No se pudo reservar');
-        const message='Tu hora quedó CONFIRMADA para el '+niceDate(selectedDate)+' a las '+selectedTime+' (hora de Chile). Código: '+result.reference+'. Guarda este código para futuras consultas.';
-        const box=document.createElement('div');const wa=whatsappLink('Hola, soy '+data.fullName+'. Reservé '+data.service+' para '+data.day+' a las '+data.time+'. Mi código es '+result.reference+'.');
-        if(wa){const link=document.createElement('a');link.className='whatsapp-btn';link.style.marginTop='10px';link.href=wa;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Enviar datos de mi reserva por WhatsApp ↗';box.append(link);}
-        alertMsg(message,false,box);form.reset();selectedTime=null;await refreshTimes();alertBox.scrollIntoView({behavior:'smooth',block:'center'});
-      }catch(err){alertMsg(err.message+' Si el horario fue tomado, selecciona otro.',true);await refreshTimes();}
-      finally{button.textContent='Confirmar reserva automática →';button.disabled=!serverReady||!selectedTime;}
+    // Configura aquí el número profesional en formato internacional, p. ej. 569XXXXXXXX.
+    // La agenda y el registro de citas se gestionan exclusivamente en Google Calendar.
+    const professionalWhatsApp = '';
+    const professionalName = 'Nutrición Consciente';
+    const menu = document.querySelector('#mainNav');
+    const menuToggle = document.querySelector('#menuToggle');
+    document.querySelector('#currentYear').textContent = new Date().getFullYear();
+    menuToggle.addEventListener('click', () => {
+      const expanded = menu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(expanded));
     });
-    start();
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+    const waButton = document.querySelector('#whatsappButton');
+    const waNote = document.querySelector('#waNote');
+    const digits = professionalWhatsApp.replace(/\D/g, '');
+    if (/^\d{9,15}$/.test(digits)) {
+      waButton.href = 'https://wa.me/' + digits + '?text=' + encodeURIComponent('Hola, quiero consultar por una atención nutricional con ' + professionalName + '.');
+      waButton.removeAttribute('aria-disabled');
+      waNote.textContent = 'WhatsApp es para consultas. Para asegurar una hora, utiliza la agenda de Google Calendar.';
+    } else {
+      waButton.removeAttribute('href');
+      waButton.removeAttribute('target');
+      waButton.setAttribute('aria-disabled', 'true');
+      waNote.textContent = 'WhatsApp se habilitará al configurar el número profesional. Para reservar, utiliza Google Calendar.';
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+LANDING NUTRICIONISTA - GOOGLE CALENDAR
+
+La agenda de citas suministrada se muestra dentro de la página.
+La confirmación, disponibilidad y cambios de citas corresponden a Google Calendar.
+
+SUBIR A GITHUB
+1. Abrir https://github.com/claudio14-tech/nutricionista-reservas
+2. Abrir index.html y elegir el lápiz Edit this file o cargar la nueva versión.
+3. Reemplazar el contenido por este index.html (en un computador), o desde Safari en iPhone, eliminar el index.html anterior y subir este archivo con el mismo nombre.
+4. Confirmar los cambios con Commit changes.
+5. Si GitHub Pages está activado para main/(root), al publicarse se actualizará el mismo enlace.
+
+NOTA WHATSAPP
+Para activar el botón, busca en index.html: const professionalWhatsApp = '';
+Cambia por el número profesional internacional, por ejemplo 569XXXXXXXX. No poner un número inventado.
+
+PÁGINA DE RESERVA
+https://calendar.google.com/calendar/appointments/schedules/AcZssZ3vVjXr6hdd0lFC7kTZXYx1jiz-6tekfsDSnAmmzxtZyLEsP-VhdMWs5Gh4v7-wKPS33O6R7z82?gv=true
