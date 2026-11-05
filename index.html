@@ -195,7 +195,25 @@
     @media (prefers-reduced-motion:reduce) { *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; } }
     .google-calendar-frame {display:block;width:100%;border:0;border-radius:12px;background:#fff;min-height:620px}
     .booking-calendar-link {display:inline-flex;justify-content:center;align-items:center;margin-top:14px;width:100%}
-    @media (max-width:720px){.google-calendar-frame{height:810px !important;min-height:810px}.calendar-booking-card{padding:18px 12px}.booking-calendar-link{font-size:14px}}
+@media (max-width:720px) {
+  .google-calendar-frame {
+    display: none !important;
+  }
+  .calendar-booking-card {
+    padding: 20px 18px;
+  }
+  .booking-calendar-link {
+    display: flex !important;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 54px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 <body>
