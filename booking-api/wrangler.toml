@@ -1,0 +1,19 @@
+name = "nutricuida-reservas"
+main = "worker.mjs"
+compatibility_date = "2026-11-19"
+
+[vars]
+SITE_ORIGIN = "https://nutricuida.cl"
+
+[[durable_objects.bindings]]
+name = "BOOKINGS"
+class_name = "BookingLock"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["BookingLock"]
+
+[[ratelimits]]
+name = "BOOKING_LIMIT"
+namespace_id = "1001"
+simple = { limit = 30, period = 60 }

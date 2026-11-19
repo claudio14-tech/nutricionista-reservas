@@ -1,0 +1,115 @@
+.booking-panel {
+  min-width: 0;
+}
+.booking-flow {
+  color: var(--navy);
+}
+.booking-flow [hidden] {
+  display: none !important;
+}
+.booking-flow fieldset {
+  min-width: 0;
+  border: 0;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.booking-flow legend {
+  font-weight: 750;
+  margin-bottom: 0.4rem;
+}
+.booking-status {
+  min-height: 1.5em;
+  margin: 0.5rem 0;
+  color: var(--text);
+}
+.booking-dates {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  padding: 0.35rem 0.25rem 0.7rem;
+}
+.booking-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0.25rem;
+}
+.booking-dates label,
+.booking-times label {
+  position: relative;
+  cursor: pointer;
+}
+.booking-dates label {
+  flex: 0 0 5rem;
+  scroll-snap-align: start;
+}
+.booking-options input {
+  position: absolute;
+  opacity: 0;
+}
+.booking-options span {
+  display: grid;
+  place-content: center;
+  min-height: 44px;
+  padding: 0.35rem 0.65rem;
+  text-align: center;
+  border: 1px solid #8db2bc;
+  border-radius: 0.7rem;
+  background: white;
+}
+.booking-dates strong {
+  font-size: 1.3rem;
+}
+.booking-options input:checked + span {
+  color: white;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.booking-options input:focus-visible + span {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+.booking-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+.booking-fields label {
+  display: grid;
+  gap: 0.25rem;
+  font-weight: 650;
+}
+.booking-fields input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #8db2bc;
+  border-radius: 0.55rem;
+  font: inherit;
+  color: var(--ink);
+}
+.booking-fields input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.booking-note {
+  font-size: 0.875rem;
+  color: var(--text);
+  margin: 0.65rem 0;
+}
+.booking-verify {
+  margin: 0.75rem 0;
+}
+.booking-confirmation {
+  background: #e5f7f3;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+.booking-confirmation a {
+  text-decoration: underline;
+}
+.booking-flow button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
