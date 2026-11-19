@@ -41,6 +41,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <meta name="booking-api" content="" />
+    <meta name="booking-turnstile" content="" />
+    <link rel="stylesheet" href="assets/booking.css" />
+    <script src="assets/booking.js" defer></script>
     <style>
       :root {
         --navy: #0d425e;
@@ -347,29 +351,6 @@
         margin-top: 15px;
         text-decoration: underline;
         text-underline-offset: 3px;
-      }
-      .embedded-calendar {
-        margin-top: 18px;
-        border: 1px solid #d9e8e7;
-        border-radius: 14px;
-        overflow: hidden;
-        background: #f8fbfa;
-      }
-      .embedded-calendar summary {
-        cursor: pointer;
-        font-size: 14px;
-        letter-spacing: 0;
-        margin: 0;
-        padding: 13px 14px;
-        background: #f1f9f7;
-        border-bottom: 1px solid #e4eeed;
-      }
-      .embedded-calendar iframe {
-        display: block;
-        width: 100%;
-        height: 610px;
-        border: 0;
-        background: white;
       }
       .payment-info {
         font-size: 14px;
@@ -789,35 +770,113 @@
           >
             <h2 id="booking-title">Agenda tu consulta</h2>
             <p class="subtitle">
-              Consulta los horarios disponibles y confirma tu reserva
-              directamente en Google Calendar.
+              Elige un día y una hora para tu consulta online.
             </p>
-            <p class="price">
-              $25.000 CLP <span>por consulta online · valor de referencia</span>
-            </p>
-            <a
-              class="btn btn-teal"
-              href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2w7bE3fSz1kPMP7L_Tc2HslSLAZAKTTP7wvY0ZqGr67xsmMsmUMhmd-5DGiLS5C_Y8xXyBI2JQ?gv=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Ver días y horas disponibles
-            </a>
-            <details class="embedded-calendar">
-              <summary>Ver la agenda en esta página</summary>
-              <iframe
-                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2w7bE3fSz1kPMP7L_Tc2HslSLAZAKTTP7wvY0ZqGr67xsmMsmUMhmd-5DGiLS5C_Y8xXyBI2JQ?gv=true"
-                title="Agenda de reservas de NutriCuida en Google Calendar"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-              ></iframe>
-            </details>
+            <p class="price">$25.000 CLP <span>por consulta online</span></p>
+            <div class="booking-flow">
+              <p id="booking-status" class="booking-status" role="status"></p>
+              <button
+                class="btn btn-outline"
+                type="button"
+                id="booking-retry"
+                hidden
+              >
+                Volver a consultar
+              </button>
+              <form id="booking-form">
+                <fieldset id="booking-date-group" hidden disabled>
+                  <legend>Día de la consulta</legend>
+                  <div
+                    id="booking-dates"
+                    class="booking-options booking-dates"
+                  ></div>
+                </fieldset>
+                <fieldset id="booking-time-group" hidden disabled>
+                  <legend>Horario disponible</legend>
+                  <div
+                    id="booking-times"
+                    class="booking-options booking-times"
+                  ></div>
+                </fieldset>
+                <fieldset
+                  id="booking-fields"
+                  class="booking-fields"
+                  hidden
+                  disabled
+                >
+                  <legend>Tus datos</legend>
+                  <label
+                    >Nombre
+                    <input
+                      name="name"
+                      autocomplete="name"
+                      required
+                      minlength="2"
+                      maxlength="100"
+                  /></label>
+                  <label
+                    >Correo electrónico
+                    <input
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      required
+                      maxlength="254"
+                  /></label>
+                  <label
+                    >Teléfono
+                    <input
+                      name="phone"
+                      type="tel"
+                      autocomplete="tel"
+                      required
+                      maxlength="25"
+                  /></label>
+                  <label
+                    >Motivo general (opcional)
+                    <input
+                      name="reason"
+                      maxlength="160"
+                      aria-describedby="booking-privacy"
+                  /></label>
+                  <p id="booking-privacy" class="booking-note">
+                    Usaremos tus datos para coordinar la consulta. Evita incluir
+                    diagnósticos u otros datos clínicos.
+                  </p>
+                </fieldset>
+                <div id="booking-verify" class="booking-verify" hidden></div>
+                <button class="btn btn-teal" type="submit" hidden>
+                  Confirmar reserva
+                </button>
+              </form>
+              <div
+                id="booking-confirmation"
+                class="booking-confirmation"
+                tabindex="-1"
+                hidden
+              >
+                <h3>Reserva registrada</h3>
+                <p></p>
+                <a target="_blank" rel="noopener noreferrer"
+                  >Abrir Google Meet</a
+                >
+                <p class="booking-note">
+                  La invitación incluye las instrucciones de transferencia.
+                  Revisa también tu carpeta de correo no deseado.
+                </p>
+              </div>
+              <noscript
+                >Activa JavaScript para consultar los horarios y
+                reservar.</noscript
+              >
+            </div>
             <div class="payment-info">
               <strong>Reserva sujeta a confirmación de pago.</strong>
               Para mantener tu hora, debes realizar la transferencia bancaria y
               enviar el comprobante dentro de los 60 minutos siguientes a la
               reserva. Si no se verifica el pago dentro de ese plazo, NutriCuida
-              podrá cancelar la cita. Los datos bancarios están disponibles en
-              la descripción de la agenda.
+              podrá cancelar la cita. Recibirás las instrucciones de
+              transferencia por correo después de reservar.
             </div>
             <a
               class="contact-link"
@@ -933,10 +992,7 @@
           <div class="steps">
             <div class="step">
               <h3>Elige un horario</h3>
-              <p>
-                Ingresa a la agenda y revisa los días y horas realmente
-                disponibles.
-              </p>
+              <p>Consulta los días y horas disponibles en esta página.</p>
             </div>
             <div class="step">
               <h3>Recibe la cita</h3>
@@ -948,8 +1004,8 @@
             <div class="step">
               <h3>Envía tu comprobante</h3>
               <p>
-                Sigue las indicaciones de la agenda para realizar la
-                transferencia dentro del plazo informado.
+                Sigue las instrucciones de transferencia del correo de
+                confirmación.
               </p>
             </div>
           </div>
@@ -968,8 +1024,8 @@
             <details>
               <summary>¿Cómo reservo una hora?</summary>
               <p>
-                Selecciona “Ver días y horas disponibles”, escoge una hora en
-                Google Calendar y completa los datos solicitados.
+                Selecciona un día y una hora arriba, completa tus datos y pulsa
+                “Confirmar reserva”.
               </p>
             </details>
             <details>
@@ -984,22 +1040,22 @@
               <p>
                 La reserva está sujeta a confirmación de transferencia. El
                 comprobante debe enviarse dentro de los 60 minutos siguientes a
-                la reserva, siguiendo las instrucciones de la agenda.
+                la reserva, siguiendo las instrucciones de la invitación por
+                correo.
               </p>
             </details>
             <details>
               <summary>¿Puedo cambiar mi hora?</summary>
               <p>
-                Revisa el correo de confirmación de Google Calendar para conocer
-                las opciones de cancelar o reprogramar que estén habilitadas.
+                Escríbenos por WhatsApp si necesitas cambiar o cancelar tu hora.
               </p>
             </details>
             <details>
               <summary>¿Puedo consultar dudas por WhatsApp?</summary>
               <p>
-                Usa WhatsApp para consultas generales. Para reservar un horario,
-                utiliza Google Calendar. Evita enviar información clínica
-                sensible por WhatsApp.
+                Usa WhatsApp para consultas generales. Puedes reservar tu hora
+                en esta página. Evita enviar información clínica sensible por
+                WhatsApp.
               </p>
             </details>
           </div>
@@ -1038,7 +1094,7 @@
         </div>
         <div class="footer-rule">
           <span>© <span id="year"></span> NutriCuida · Chile</span
-          ><span>Las reservas se gestionan mediante Google Calendar.</span>
+          ><span>Consultas online con hora reservada.</span>
         </div>
       </div>
     </footer>
