@@ -507,6 +507,9 @@
         color: #516e78;
         line-height: 1.85;
       }
+      .about-copy .about-book {
+        margin-top: 22px;
+      }
       .about-points {
         display: grid;
         gap: 11px;
@@ -752,8 +755,25 @@
         .about-grid {
           gap: 22px;
         }
-        .about-copy {
-          grid-row: 1;
+        section.about {
+          padding: 20px 0 28px;
+        }
+        .about-copy h2 {
+          font-size: clamp(26px, 7vw, 30px);
+          margin: 6px 0 10px;
+        }
+        .about-copy p {
+          font-size: 15px;
+          line-height: 1.5;
+          margin-bottom: 10px;
+        }
+        .about-copy .about-book {
+          margin-top: 12px;
+          margin-bottom: 0;
+        }
+        .about-points {
+          gap: 5px;
+          line-height: 1.45;
         }
         section.content {
           padding: 44px 0 62px;
@@ -772,7 +792,7 @@
           flex-direction: column;
         }
         .about-art {
-          min-height: 230px;
+          display: none;
         }
         .footer-links {
           margin-top: 8px;
@@ -1064,36 +1084,31 @@
             />
           </div>
           <div class="about-copy">
-            <div class="eyebrow">ATENCIÓN CERCANA</div>
-            <h2 id="about-title">Nutrición clínica con Erika Miranda Hucke</h2>
+            <div class="eyebrow">NUTRICIONISTA</div>
+            <h2 id="about-title">Erika Miranda Hucke</h2>
             <p>
-              Nutricionista titulada de la Universidad de Chile, con más de 10
-              años de experiencia atendiendo a personas adultas y adultas mayores
-              con enfermedades crónicas como diabetes, hipertensión arterial y
-              enfermedad renal crónica. También cuenta con experiencia en la
-              atención de personas con disfagia, con y sin requerimientos de
-              nutrición enteral.
+              Titulada de la Universidad de Chile, con más de 10 años de
+              experiencia clínica con personas adultas y mayores. Atiende a
+              pacientes con diabetes, hipertensión arterial, enfermedad renal
+              crónica y disfagia, con y sin requerimientos de nutrición enteral.
             </p>
             <p>
-              Formación de especialización mediante diplomados y cursos del INTA
-              y de MEDICHI, ambos de la Universidad de Chile.
+              Diplomados y cursos de especialización del INTA y de MEDICHI de la
+              Universidad de Chile.
             </p>
             <p><strong>Registro SIS: 93071</strong></p>
             <p>
-              El cuidado nutricional es más útil cuando se adapta a tu vida.
-              Nuestra propuesta es acompañarte con orientación clara, un plan
-              que considere tus hábitos y un espacio para conversar sobre tus
-              inquietudes.
+              Orientación clara y un plan adaptado a tus hábitos, con espacio
+              para conversar sobre tus inquietudes.
             </p>
             <div class="about-points">
               <span>Enfoque en diabetes, hipertensión y salud digestiva</span
-              ><span>Orientación individualizada y práctica</span
               ><span
                 >Control de peso y hábitos saludables como áreas
                 complementarias</span
               >
             </div>
-            <p style="margin-top: 22px">
+            <p class="about-book">
               <a class="btn btn-primary" href="#reservar"
                 >Reservar una consulta</a
               >
