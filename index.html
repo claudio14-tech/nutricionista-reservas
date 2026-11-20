@@ -431,6 +431,10 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 19px;
       }
+      .clinical-complement {
+        color: var(--text);
+        margin: 20px 0 0;
+      }
       .clinical-card {
         background: white;
         border: 1px solid #dce8e8;
@@ -506,22 +510,6 @@
       .about-copy p {
         color: #516e78;
         line-height: 1.85;
-      }
-      .about-copy .about-book {
-        margin-top: 22px;
-      }
-      .about-points {
-        display: grid;
-        gap: 11px;
-        font-size: 14px;
-        font-weight: 650;
-        color: var(--navy);
-      }
-      .about-points span:before {
-        content: "✓";
-        color: #098f88;
-        font-weight: 900;
-        margin-right: 9px;
       }
       .steps {
         display: grid;
@@ -766,14 +754,6 @@
           font-size: 15px;
           line-height: 1.5;
           margin-bottom: 10px;
-        }
-        .about-copy .about-book {
-          margin-top: 12px;
-          margin-bottom: 0;
-        }
-        .about-points {
-          gap: 5px;
-          line-height: 1.45;
         }
         section.content {
           padding: 44px 0 62px;
@@ -1065,6 +1045,10 @@
               </p>
             </article>
           </div>
+          <p class="clinical-complement">
+            <strong>Áreas complementarias</strong><br />
+            Control de peso y hábitos saludables.
+          </p>
         </div>
       </section>
       <section
@@ -1097,22 +1081,6 @@
               Universidad de Chile.
             </p>
             <p><strong>Registro SIS: 93071</strong></p>
-            <p>
-              Orientación clara y un plan adaptado a tus hábitos, con espacio
-              para conversar sobre tus inquietudes.
-            </p>
-            <div class="about-points">
-              <span>Enfoque en diabetes, hipertensión y salud digestiva</span
-              ><span
-                >Control de peso y hábitos saludables como áreas
-                complementarias</span
-              >
-            </div>
-            <p class="about-book">
-              <a class="btn btn-primary" href="#reservar"
-                >Reservar una consulta</a
-              >
-            </p>
           </div>
         </div>
       </section>
