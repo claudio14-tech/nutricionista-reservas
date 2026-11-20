@@ -65,7 +65,6 @@
         --radius: 22px;
         --chat-size: 52px;
         --chat-right: max(12px, env(safe-area-inset-right));
-        --chat-rail: calc(var(--chat-size) + var(--chat-right) + 8px);
       }
       * {
         box-sizing: border-box;
@@ -79,14 +78,19 @@
       }
       html:has(#booking-form :focus, .faq details[open]:focus-within) {
         scroll-snap-type: none;
+        scroll-padding-bottom: calc(
+          var(--chat-size) + 24px + env(safe-area-inset-bottom)
+        );
       }
       main > section {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        align-content: center;
+        align-content: start;
         min-height: calc(100svh - var(--header-height, 82px) - 12px);
         scroll-snap-align: start;
         scroll-snap-stop: always;
+        padding-block: 24px
+          calc(var(--chat-size) + 24px + env(safe-area-inset-bottom));
       }
       footer {
         scroll-snap-align: end;
@@ -135,7 +139,14 @@
       }
       main .wrap,
       footer .wrap {
-        width: min(1160px, calc(100% - 2 * var(--chat-rail)));
+        width: min(
+          1160px,
+          calc(
+            100% - 2 *
+              max(20px, env(safe-area-inset-left), env(safe-area-inset-right))
+          )
+        );
+        margin-inline: auto;
       }
       .eyebrow {
         font-weight: 800;
@@ -304,7 +315,6 @@
         fill: currentColor;
       }
       .intro {
-        padding: 60px 0 72px;
         position: relative;
         overflow: hidden;
         background: linear-gradient(130deg, #fff 0%, #f2fbf9 62%, #eaf4f4 100%);
@@ -324,19 +334,42 @@
         );
         pointer-events: none;
       }
-      .intro-copy {
-        max-width: 680px;
-        margin-inline: auto;
+      .intro .wrap {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 42px;
+        align-items: start;
         position: relative;
         z-index: 1;
       }
       .booking-section {
         background: #eaf4f4;
-        padding: clamp(20px, 4svh, 56px) 0;
       }
       .booking-section .booking-panel {
         max-width: 660px;
         margin-inline: auto;
+      }
+      .intro-copy h1 {
+        margin-top: 0;
+      }
+      .intro-profile {
+        padding: 24px 28px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        color: var(--text);
+      }
+      .intro-profile h2 {
+        margin: 5px 0 14px;
+        color: var(--ink);
+        font-size: clamp(26px, 3vw, 37px);
+      }
+      .intro-profile p {
+        margin-bottom: 10px;
+        line-height: 1.85;
+      }
+      .intro-profile p:last-child {
+        margin-bottom: 0;
       }
       .intro-copy h1 em {
         color: var(--blue);
@@ -349,21 +382,6 @@
         color: var(--text);
       }
 
-      .professional {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-top: 36px;
-        border-top: 1px solid #dceae8;
-        padding-top: 22px;
-        font-size: 13px;
-        color: #496875;
-      }
-      .professional b {
-        display: block;
-        color: var(--ink);
-        font-size: 14px;
-      }
       .booking-panel {
         background: white;
         border: 1px solid #d9e9ea;
@@ -432,13 +450,10 @@
         border-radius: 11px;
         margin: 16px 0 0;
       }
-      section.content {
-        padding: 88px 0;
-      }
       .section-heading {
         text-align: center;
         max-width: 700px;
-        margin: 0 auto 34px;
+        margin: 0 auto 20px;
       }
       .section-heading p {
         color: var(--text);
@@ -485,50 +500,6 @@
         stroke-linecap: round;
         stroke-linejoin: round;
       }
-      .about {
-        background: #e8f4f2;
-      }
-      .about-grid {
-        display: grid;
-        grid-template-columns: 0.85fr 1.15fr;
-        gap: 60px;
-        align-items: center;
-      }
-      .about-art {
-        border-radius: 26px;
-        background: radial-gradient(
-          circle at 30% 27%,
-          #a5e4d5 0%,
-          #d9f3ed 52%,
-          #d5ebe8 100%
-        );
-        min-height: 340px;
-        display: grid;
-        place-items: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .about-art:before {
-        content: "";
-        width: 500px;
-        height: 500px;
-        border: 1px solid rgba(13, 66, 94, 0.13);
-        border-radius: 50%;
-        position: absolute;
-        top: 85px;
-        left: -120px;
-      }
-      .about-art img {
-        width: 65%;
-        max-width: 250px;
-        object-fit: contain;
-        filter: drop-shadow(0 15px 17px rgba(13, 66, 94, 0.08));
-        z-index: 1;
-      }
-      .about-copy p {
-        color: #516e78;
-        line-height: 1.85;
-      }
       .steps {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -571,7 +542,7 @@
         padding-top: 12px;
       }
       .last-cta {
-        margin: 55px auto 80px;
+        margin: 20px auto 0;
         padding: 37px 43px;
         border-radius: 24px;
         background: var(--navy);
@@ -708,30 +679,106 @@
       @media (max-width: 760px) {
         :root {
           --chat-size: 48px;
-          --chat-right: max(8px, env(safe-area-inset-right));
+          --chat-right: max(12px, env(safe-area-inset-right));
         }
         main .wrap,
         footer .wrap {
-          width: auto;
-          max-width: 540px;
-          margin-inline-start: max(
-            12px,
-            env(safe-area-inset-left),
-            calc((100% - 540px) / 2)
+          width: min(
+            540px,
+            calc(
+              100% - 2 *
+                max(16px, env(safe-area-inset-left), env(safe-area-inset-right))
+            )
           );
-          margin-inline-end: var(--chat-rail);
         }
-        .intro {
-          padding: 28px 0 52px;
+        main > section {
+          padding-block-start: 16px;
+        }
+        .intro .wrap {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
         }
         .intro-copy h1 {
-          font-size: clamp(38px, 10vw, 55px);
+          font-size: clamp(32px, 10.3vw, 40px);
+          margin-bottom: 16px;
         }
         .intro-copy .lead {
           font-size: 15px;
+          line-height: 1.65;
         }
-        .professional {
-          margin-top: 21px;
+        .intro-profile {
+          padding: 14px 16px;
+        }
+        .intro-profile h2 {
+          margin-bottom: 8px;
+        }
+        .intro-profile p {
+          font-size: 14px;
+          line-height: 1.48;
+          margin-bottom: 8px;
+        }
+        .booking-panel h2 {
+          margin-top: 3px;
+        }
+        .section-heading {
+          text-align: left;
+          margin-bottom: 16px;
+        }
+        .section-heading h2 {
+          margin: 4px 0 10px;
+        }
+        .section-heading p {
+          margin-bottom: 0;
+        }
+        .clinical-grid,
+        .steps {
+          gap: 10px;
+        }
+        .clinical-card {
+          padding: 14px;
+          display: grid;
+          grid-template-columns: 36px minmax(0, 1fr);
+          gap: 4px 10px;
+          align-items: center;
+        }
+        .clinical-card .symbol {
+          grid-row: 1 / 3;
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          margin: 0;
+          align-self: start;
+        }
+        .clinical-card .symbol svg {
+          width: 20px;
+          height: 20px;
+        }
+        .clinical-card h3,
+        .step h3 {
+          font-size: 17px;
+          margin: 0 0 3px;
+        }
+        .clinical-card p,
+        .step p {
+          line-height: 1.45;
+        }
+        .clinical-complement {
+          margin-top: 12px;
+        }
+        .step {
+          padding: 15px;
+        }
+        .faq-grid {
+          gap: 6px;
+        }
+        .faq-grid h2 {
+          margin: 5px 0 10px;
+        }
+        .faq-grid p {
+          margin-bottom: 8px;
+        }
+        .faq details {
+          padding: 5px 0;
         }
         .booking-panel {
           padding: 22px 19px;
@@ -744,43 +791,22 @@
         }
         .clinical-grid,
         .steps,
-        .about-grid,
         .faq-grid {
           grid-template-columns: 1fr;
         }
-        .about-grid {
-          gap: 22px;
-        }
-        section.about {
-          padding: 20px 0 28px;
-        }
-        .about-copy h2 {
-          font-size: clamp(26px, 7vw, 30px);
-          margin: 6px 0 10px;
-        }
-        .about-copy p {
-          font-size: 15px;
-          line-height: 1.5;
-          margin-bottom: 10px;
-        }
-        section.content {
-          padding: 44px 0 62px;
-        }
         .last-cta {
-          padding: 27px;
+          padding: 16px;
+          gap: 14px;
           flex-direction: column;
           align-items: stretch;
-          margin: 33px auto 56px;
+          margin: 20px auto 0;
         }
         .last-cta h2 {
-          font-size: 26px;
+          font-size: 21px;
         }
         .footer-top,
         .footer-rule {
           flex-direction: column;
-        }
-        .about-art {
-          display: none;
         }
         .footer-links {
           margin-top: 8px;
@@ -812,9 +838,8 @@
             height="55"
         /></a>
         <nav id="mainNav" class="nav" aria-label="Navegación principal">
-          <a href="#reservar">Reservar</a
+          <a href="#inicio">Inicio</a><a href="#reservar">Reservar</a
           ><a href="#servicios">Áreas de atención</a
-          ><a href="#enfoque">Profesional</a
           ><a href="#preguntas">Preguntas frecuentes</a>
         </nav>
         <a class="btn btn-primary header-book" href="#reservar">
@@ -854,17 +879,23 @@
             <a class="btn btn-outline" href="#reservar"
               >Agenda tu consulta online</a
             >
-            <div class="professional">
-              <img
-                src="assets/nutricuida/isotipo.svg"
-                alt=""
-                width="45"
-                height="45"
-              /><span
-                ><b>Erika Miranda Hucke</b>Nutricionista · Consultas
-                online</span
-              >
-            </div>
+          </div>
+          <div class="intro-profile" id="enfoque" tabindex="-1">
+            <div class="eyebrow">NUTRICIONISTA</div>
+            <h2 id="about-title">Erika Miranda Hucke</h2>
+            <p>Titulada de la Universidad de Chile.</p>
+            <p>
+              Nutricionista con más de 10 años de experiencia atendiendo
+              pacientes adultos y adultos mayores con enfermedades crónicas como
+              Diabetes, Hipertensión Arterial, Enfermedad Renal Crónica, así
+              como también con patologías como disfagia con y sin requerimientos
+              de Nutrición Enteral.
+            </p>
+            <p>
+              Especializaciones con Diplomados y cursos de INTA y MEDICHI de la
+              Universidad de Chile.
+            </p>
+            <p><strong>Registro SIS: 93071</strong></p>
           </div>
         </div>
       </section>
@@ -1064,41 +1095,6 @@
           </p>
         </div>
       </section>
-      <section
-        id="enfoque"
-        tabindex="-1"
-        class="content about"
-        aria-labelledby="about-title"
-      >
-        <div class="wrap about-grid">
-          <div class="about-art">
-            <img
-              src="assets/nutricuida/isotipo.svg"
-              alt=""
-              width="250"
-              height="250"
-              loading="lazy"
-            />
-          </div>
-          <div class="about-copy">
-            <div class="eyebrow">NUTRICIONISTA</div>
-            <h2 id="about-title">Erika Miranda Hucke</h2>
-            <p>Titulada de la Universidad de Chile.</p>
-            <p>
-              Nutricionista con más de 10 años de experiencia atendiendo
-              pacientes adultos y adultos mayores con enfermedades crónicas como
-              Diabetes, Hipertensión Arterial, Enfermedad Renal Crónica, así
-              como también con patologías como disfagia con y sin requerimientos
-              de Nutrición Enteral.
-            </p>
-            <p>
-              Especializaciones con Diplomados y cursos de INTA y MEDICHI de la
-              Universidad de Chile.
-            </p>
-            <p><strong>Registro SIS: 93071</strong></p>
-          </div>
-        </div>
-      </section>
       <section class="content" id="como-funciona" aria-labelledby="steps-title">
         <div class="wrap">
           <div class="section-heading">
@@ -1209,7 +1205,6 @@
           <div class="footer-links">
             <a href="#reservar">Reservar</a
             ><a href="#servicios">Áreas de atención</a
-            ><a href="#enfoque">Profesional</a
             ><a href="#preguntas">Preguntas</a>
           </div>
         </div>
