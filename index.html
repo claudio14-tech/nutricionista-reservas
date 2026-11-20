@@ -72,9 +72,24 @@
       }
       html {
         scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
         scroll-padding-top: calc(
           var(--header-height, 82px + env(safe-area-inset-top)) + 12px
         );
+      }
+      html:has(#booking-form :focus, .faq details[open]:focus-within) {
+        scroll-snap-type: none;
+      }
+      main > section {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-content: center;
+        min-height: calc(100svh - var(--header-height, 82px) - 12px);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      footer {
+        scroll-snap-align: end;
       }
       body {
         margin: 0;
@@ -309,16 +324,19 @@
         );
         pointer-events: none;
       }
-      .intro-grid {
-        display: grid;
-        grid-template-columns: 0.86fr 1.14fr;
-        gap: 70px;
-        align-items: start;
+      .intro-copy {
+        max-width: 680px;
+        margin-inline: auto;
         position: relative;
         z-index: 1;
       }
-      .intro-copy {
-        padding: 28px 0 0;
+      .booking-section {
+        background: #eaf4f4;
+        padding: clamp(20px, 4svh, 56px) 0;
+      }
+      .booking-section .booking-panel {
+        max-width: 660px;
+        margin-inline: auto;
       }
       .intro-copy h1 em {
         color: var(--blue);
@@ -620,9 +638,6 @@
         gap: 15px;
       }
       @media (max-width: 1000px) {
-        .intro-grid {
-          gap: 28px;
-        }
         .booking-panel {
           padding: 23px;
         }
@@ -709,13 +724,6 @@
         .intro {
           padding: 28px 0 52px;
         }
-        .intro-grid {
-          grid-template-columns: 1fr;
-          gap: 26px;
-        }
-        .intro-copy {
-          padding: 0;
-        }
         .intro-copy h1 {
           font-size: clamp(38px, 10vw, 55px);
         }
@@ -781,6 +789,7 @@
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
+          scroll-snap-type: none;
         }
         * {
           transition: none !important;
@@ -831,7 +840,7 @@
         class="intro"
         aria-labelledby="intro-title"
       >
-        <div class="wrap intro-grid">
+        <div class="wrap">
           <div class="intro-copy">
             <h1 id="intro-title">
               Nutrición clínica <em>para tu bienestar.</em>
@@ -857,12 +866,16 @@
               >
             </div>
           </div>
-          <div
-            id="reservar"
-            tabindex="-1"
-            class="booking-panel"
-            aria-labelledby="booking-title"
-          >
+        </div>
+      </section>
+      <section
+        id="reservar"
+        class="booking-section"
+        tabindex="-1"
+        aria-labelledby="booking-title"
+      >
+        <div class="wrap">
+          <div class="booking-panel">
             <h2 id="booking-title">Agenda tu consulta</h2>
             <p class="subtitle">
               Elige un día y una hora para tu consulta online.
@@ -1074,9 +1087,9 @@
             <p>
               Nutricionista con más de 10 años de experiencia atendiendo
               pacientes adultos y adultos mayores con enfermedades crónicas como
-              Diabetes, Hipertensión Arterial, Enfermedad Renal Crónica, así como
-              también con patologías como disfagia con y sin requerimientos de
-              Nutrición Enteral.
+              Diabetes, Hipertensión Arterial, Enfermedad Renal Crónica, así
+              como también con patologías como disfagia con y sin requerimientos
+              de Nutrición Enteral.
             </p>
             <p>
               Especializaciones con Diplomados y cursos de INTA y MEDICHI de la
@@ -1168,13 +1181,13 @@
             </details>
           </div>
         </div>
-      </section>
-      <div class="wrap">
-        <div class="last-cta">
-          <h2>Empieza a cuidar tu salud con acompañamiento nutricional.</h2>
-          <a class="btn" href="#reservar">Agendar mi consulta </a>
+        <div class="wrap">
+          <div class="last-cta">
+            <h2>Empieza a cuidar tu salud con acompañamiento nutricional.</h2>
+            <a class="btn" href="#reservar">Agendar mi consulta</a>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
     <footer>
       <div class="wrap">
