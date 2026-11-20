@@ -72,7 +72,9 @@
       }
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: calc(92px + env(safe-area-inset-top));
+        scroll-padding-top: calc(
+          var(--header-height, 82px + env(safe-area-inset-top)) + 12px
+        );
       }
       body {
         margin: 0;
@@ -191,8 +193,17 @@
         font-weight: 700;
         color: var(--text);
       }
-      .nav a:hover {
-        color: var(--teal);
+      .nav a:hover,
+      .nav a[aria-current="location"] {
+        color: var(--blue);
+      }
+      .nav a[aria-current="location"] {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.35em;
+      }
+      main [tabindex="-1"]:focus {
+        outline: none;
       }
       .btn {
         display: inline-flex;
@@ -657,6 +668,8 @@
           right: 0;
           flex-direction: column;
           align-items: stretch;
+          max-height: calc(100dvh - var(--header-height, 70px));
+          overflow-y: auto;
           padding: 18px max(24px, env(safe-area-inset-right)) 18px
             max(24px, env(safe-area-inset-left));
           background: white;
@@ -668,7 +681,12 @@
         }
         .nav a {
           font-size: 15px;
-          padding: 8px 0;
+          padding: 10px 12px;
+          min-height: 44px;
+          border-radius: 8px;
+        }
+        .nav a[aria-current="location"] {
+          background: #e5f7f3;
         }
         .menu-toggle {
           display: block;
@@ -734,8 +752,11 @@
         .about-grid {
           gap: 22px;
         }
+        .about-copy {
+          grid-row: 1;
+        }
         section.content {
-          padding: 62px 0;
+          padding: 44px 0 62px;
         }
         .last-cta {
           padding: 27px;
@@ -804,7 +825,12 @@
       </div>
     </header>
     <main id="contenido" tabindex="-1">
-      <section id="inicio" class="intro" aria-labelledby="intro-title">
+      <section
+        id="inicio"
+        tabindex="-1"
+        class="intro"
+        aria-labelledby="intro-title"
+      >
         <div class="wrap intro-grid">
           <div class="intro-copy">
             <h1 id="intro-title">
@@ -833,6 +859,7 @@
           </div>
           <div
             id="reservar"
+            tabindex="-1"
             class="booking-panel"
             aria-labelledby="booking-title"
           >
@@ -956,7 +983,12 @@
           </div>
         </div>
       </section>
-      <section id="servicios" class="content" aria-labelledby="areas-title">
+      <section
+        id="servicios"
+        tabindex="-1"
+        class="content"
+        aria-labelledby="areas-title"
+      >
         <div class="wrap">
           <div class="section-heading">
             <span class="eyebrow">ÁREAS DE ATENCIÓN</span>
@@ -1015,7 +1047,12 @@
           </div>
         </div>
       </section>
-      <section id="enfoque" class="content about" aria-labelledby="about-title">
+      <section
+        id="enfoque"
+        tabindex="-1"
+        class="content about"
+        aria-labelledby="about-title"
+      >
         <div class="wrap about-grid">
           <div class="about-art">
             <img
@@ -1079,7 +1116,12 @@
           </div>
         </div>
       </section>
-      <section id="preguntas" class="content faq" aria-labelledby="faq-title">
+      <section
+        id="preguntas"
+        tabindex="-1"
+        class="content faq"
+        aria-labelledby="faq-title"
+      >
         <div class="wrap faq-grid">
           <div>
             <div class="eyebrow">PREGUNTAS FRECUENTES</div>
@@ -1185,6 +1227,45 @@
       );
       const toggle = document.querySelector("#menuToggle");
       const menu = document.querySelector("#mainNav");
+      const header = document.querySelector(".site-header");
+      const destinations = Array.from(menu.querySelectorAll("a"), (link) => ({
+        link,
+        section: document.querySelector(link.hash),
+      }));
+
+      function updateCurrentSection() {
+        const line = header.getBoundingClientRect().bottom + 14;
+        const current = destinations.findLast(
+          ({ section }) => section.getBoundingClientRect().top <= line,
+        );
+        for (const destination of destinations) {
+          if (destination === current)
+            destination.link.setAttribute("aria-current", "location");
+          else destination.link.removeAttribute("aria-current");
+        }
+      }
+
+      const measureHeader = () => {
+        document.documentElement.style.setProperty(
+          "--header-height",
+          header.offsetHeight + "px",
+        );
+        updateCurrentSection();
+      };
+      measureHeader();
+      new ResizeObserver(measureHeader).observe(header);
+      let scrollFrame;
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (scrollFrame) return;
+          scrollFrame = requestAnimationFrame(() => {
+            scrollFrame = undefined;
+            updateCurrentSection();
+          });
+        },
+        { passive: true },
+      );
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && menu.classList.contains("open")) {
           menu.classList.remove("open");
